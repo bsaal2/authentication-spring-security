@@ -3,10 +3,13 @@ package com.bishal.authentication.models;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.Date;
 
 @Entity
 @Table(name="authUser")
@@ -26,6 +29,13 @@ public class User implements UserDetails {
 
     @NotBlank(message="Password can not be empty")
     private String password;
+
+    @CreationTimestamp
+    @Column(updatable = false, nullable = false)
+    private Date createdAt;
+
+    @UpdateTimestamp
+    private Date updatedAt;
 
     // Empty constructor
     public User() {}
@@ -68,6 +78,22 @@ public class User implements UserDetails {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
     @Override
