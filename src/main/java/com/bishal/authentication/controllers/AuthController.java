@@ -3,6 +3,7 @@ package com.bishal.authentication.controllers;
 import com.bishal.authentication.dto.request.UserLoginDTO;
 import com.bishal.authentication.dto.request.UserRegisterDTO;
 import com.bishal.authentication.dto.response.ApiResponse;
+import com.bishal.authentication.dto.response.UserDTO;
 import com.bishal.authentication.models.User;
 import com.bishal.authentication.services.UserService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -54,7 +55,7 @@ public class AuthController {
             return ResponseEntity.badRequest().body(apiResponse);
         }
 
-        User user = this.userService.registerNewUser(userDTO);
+        UserDTO user = this.userService.registerNewUser(userDTO);
         ApiResponse apiResponse = new ApiResponse(HttpStatus.CREATED.value(), false, "User registered successfully!", user);
         return ResponseEntity.status(HttpStatus.CREATED).body(apiResponse);
     }
